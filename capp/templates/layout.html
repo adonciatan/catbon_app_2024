@@ -26,6 +26,7 @@
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='methodology.css') }}">
       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='carbon_app.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='user.css') }}">
 
       <!-- To activate media queries in devices -->
       <meta name="viewport" content="user-scalable=yes, width=device-width, initial-scale=1">
@@ -44,6 +45,24 @@
               <h1 class="logo">
                 <span class="text-logo"><i class="fa-solid fa-leaf"></i> Carbon</span> App
               </h1>
+              {% if current_user.is_authenticated %}
+              <nav>
+                <ul>
+                    <li>
+                      <a href="{{url_for('users.logout')}}">Logout</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('home.home_home')}}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('methodology.methodology_home')}}">Methology</a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('carbon_app.carbon_app_home')}}">Carbon App</a>
+                    </li>
+                </ul>
+              </nav> 
+              {% else %}
               <nav>
                 <ul>
                     <li>
@@ -62,7 +81,8 @@
                         <a href="{{url_for('carbon_app.carbon_app_home')}}">Carbon App</a>
                     </li>
                 </ul>
-              </nav> 
+              </nav>
+              {% endif %}
             </div>
           </div>
         </section>

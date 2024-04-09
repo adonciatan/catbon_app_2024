@@ -1,16 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
 <!-- Header -->
 <section class="section_header_home">
   <div class="container">
 
     <div class="header_home">
       <div class="box"> 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div> 
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <h1 style="font-size:55px;"><span class="text-logo"> Home</span></h1>
         <p style="text-align:left;">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repellat dolores quos asperiores repellendus facilis cum illo aperiam odit doloremque nostrum. Totam excepturi labore voluptatibus iusto sapiente quisquam consectetur optio magnam voluptates omnis vel officia alias distinctio quas laborum reiciendis ratione inventore veniam, cupiditate doloribus dolore, eius natus a. Magni inventore consequuntur voluptas reprehenderit perferendis! Molestias aspernatur rem autem aut temporibus.
         </p>
+        {% if current_user.is_authenticated %}
+        {% else %}
         <div class="container_buttons_links_header_home">
           <div class="btn">
               <a href="{{url_for('users.register')}}" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Register</a>
@@ -18,7 +30,8 @@
           <div class="btn">
               <a href="{{url_for('users.login')}}" class="btn btn-primary btn-lg mr-2", style="background-color:#007bff;">Login</a>
           </div>
-        </div>  
+        </div>
+        {% endif %}
       </div>
       <div class="box">
         <img 
@@ -31,6 +44,8 @@
 
   </div>
 </section> 
+
+
 
 <!-- Developers -->
 <section class="section_developers">
